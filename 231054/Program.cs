@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,81 +9,73 @@ namespace _231054
 {
     internal class Program
     {
+        static void Total(double saldo)
+        {
+            Console.WriteLine("O saldo é igual a: " + saldo.ToString("C"));
+        }
+        static double Dep(double saldo)
+        {
+            double deposito = 0;
+            Console.WriteLine("Valor a ser depositado:");
+            deposito = double.Parse(Console.ReadLine());
+            saldo += deposito;
+            Console.WriteLine("Pronto");
+            return saldo;
+        }
+        static double Saque(double saldo)
+        {
+
+            double saque = double.MinValue;
+            Console.WriteLine("Valor a ser sacado:");
+            saque = double.Parse(Console.ReadLine());
+            if (saldo < saque)
+            {
+                Console.WriteLine("Pronto");
+            }
+            else
+            {
+                saldo -= saque;
+                Console.WriteLine("Pronto");
+            }
+            return saldo;
+        }
+        static double Pag(double saldo)
+        {
+            double pagamento = double.MinValue;
+            Console.WriteLine("Digite o número da conta");
+            Console.ReadLine();
+            Console.WriteLine("Valor do pagamento:");
+            pagamento = double.Parse(Console.ReadLine());
+            if (saldo < pagamento)
+            {
+                Console.WriteLine("Pronto");
+
+            }
+            else
+            {
+                saldo -= pagamento;
+                Console.WriteLine("Pronto");
+            }
+            return saldo;
+        }
+
         static void Main(string[] args)
         {
-
-
-            string s = "sim";
-            double de;
-            double deposito = 0;
-            double total = 0;
-            do
+            double balance = 0;
+            string op;
+            while (true)
             {
-
-
-                Console.WriteLine("Qual a opição você deseja realizar ");
-                Console.WriteLine("Digite (1) para Depósitar");
-                Console.WriteLine("Digite (2) para Saque");
-                Console.WriteLine("Digite (3) para Pagamento");
-                Console.WriteLine("Digite (4) para consultar Saldo");
-                int tipo = int.Parse(Console.ReadLine());
-                switch (tipo)
+                Console.WriteLine("###OPÇÕES### \n D-DEPOSITO \n S-SAQUE \n P-PAGAMENTO \n B-SALDO");
+                op = Console.ReadLine().ToUpper();
+                switch (op)
                 {
-                    case 1:
-                        Console.WriteLine("Quanto você deseja depositar");
-                       de= double.Parse(Console.ReadLine());
-                        
-                        Console.WriteLine("Seu saldo disponivel e " + dep(total, de,deposito));
-                       
-                        break;
-
-                    case 2:
-
-
-                        Console.WriteLine("Quanto você deseja sacar");
-                        double sacar = double.Parse(Console.ReadLine());
-
-                        if (sacar > total)
-                        {
-                            Console.WriteLine("Você nao ten saldo disponivel");
-
-                        }
-                        else
-                        {
-                            Console.WriteLine("Seu saldo disponivel e " + sac(total, sacar, deposito));
-                        }
-                            ;
-                            break;
-
-
+                    case "D": balance = Dep(balance); Console.ReadKey(); Console.Clear(); break;
+                    case "S": balance = Saque(balance); Console.ReadKey(); Console.Clear(); break;
+                    case "P": balance = Pag(balance); Console.ReadKey(); Console.Clear(); break;
+                    case "B": Total(balance); Console.ReadKey(); Console.Clear(); break;
                 }
 
-                Console.WriteLine("Se deseja continuar digite (sim)");
-                 s = Console.ReadLine().ToLower();
-            } while (s == "sim");
- Console.ReadKey();
-
-        }
-
-         static double Dep(int tipo ,double total, double de,double deposito,double sacar) 
-        {
-            
-            if (tipo == 1) { 
-            total = deposito;
-             total = de + deposito;
-            return total;
-             }
-           else  if (tipo == 2){ 
-                total = deposito;
-            total = deposito - sacar;
-            return total;
             }
-        }
-        static double sac(double total, ,double deposito) 
-        {
-            total = deposito;
-            total =  deposito - sacar;
-            return total;
 
         }
     }
